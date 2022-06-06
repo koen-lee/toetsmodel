@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bolletjesmodel</title>
+
+<style>
+body {font-family: sans-serif;}
+div  {
+  border: 1px solid black;
+  padding: 5px;
+  margin: 2px;
+  border-radius: 3px;
+}
+</style>
+</head>
+<body>
+<div id="page" class="container"></div>
+<script lang="js">
+ var model = { "toets": "Havo WisB 2022.1",
+ "vragen": [
+    { "naam": "Bevolkingsgroei",
+      "bolletjes": [ 2,3,4,3 ]
+    },
+    { "naam": "Raketbaan",
+      "bolletjes": [ 4,3,1 ]
+    },
+    { "naam": "Gulden snede",
+      "bolletjes": [ 2,3,1 ]
+    }
+]};
+
+const page = document.getElementById("page");
+var toetsRegel = document.createElement("h2");
+toetsRegel.appendChild(document.createTextNode(model.toets));
+page.appendChild(toetsRegel);
+var naamRegel = document.createElement("div");
+naamRegel.appendChild(document.createTextNode("Leerling:"));
+page.appendChild(naamRegel);
+var questionNumber = 1;
+model.vragen.forEach(question=> {
+  var questionDiv = document.createElement("div");
+  questionDiv.appendChild(document.createTextNode(question.naam));
+  question.bolletjes.forEach(bolCount=> {
+    var bolletjesDiv = document.createElement("div");
+    bolletjesDiv.appendChild(document.createTextNode(questionNumber++));
+    for( var bol = 0; bol < bolCount; bol++)
+    {
+      var bolLine = document.createElement("div");
+      bolLine.appendChild(document.createTextNode("o"));
+      bolletjesDiv.appendChild(bolLine);
+      bolletjesDiv.style.margin = "0px";
+    } 
+    var emptyBox = document.createElement("div");
+    emptyBox.style.float = "right";
+    emptyBox.style.width = "10%";
+    emptyBox.style.height = "100%";
+    bolletjesDiv.appendChild(emptyBox);
+    questionDiv.appendChild(bolletjesDiv);
+  });
+  page.appendChild(questionDiv);
+  
+});
+</script>
+</body>
+</html>
