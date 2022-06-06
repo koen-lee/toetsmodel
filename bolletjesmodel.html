@@ -1,65 +1,89 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Bolletjesmodel</title>
-
-<style>
+  <script lang="js">
+ var model = { 
+   "toets": "Havo WisB 2022.1",
+   "vragen": [
+      { "naam": "Bevolkingsgroei",
+        "bolletjes": [ 2,3,4,3 ]
+      },
+      { "naam": "Raketbaan",
+        "bolletjes": [ 4,3,1 ]
+      },
+      { "naam": "Gulden snede",
+        "bolletjes": [ 2,3,1 ]
+      }
+  ]};
+  </script>
+  <head>
+    <title>Bolletjesmodel </title>
+    <style>
 body {font-family: sans-serif;}
-div  {
+div {
   border: 1px solid black;
-  padding: 5px;
-  margin: 2px;
+  padding: 1px;
+  margin: 1px;
   border-radius: 3px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
-</style>
-</head>
-<body>
-<div id="page" class="container"></div>
-<script lang="js">
- var model = { "toets": "Havo WisB 2022.1",
- "vragen": [
-    { "naam": "Bevolkingsgroei",
-      "bolletjes": [ 2,3,4,3 ]
-    },
-    { "naam": "Raketbaan",
-      "bolletjes": [ 4,3,1 ]
-    },
-    { "naam": "Gulden snede",
-      "bolletjes": [ 2,3,1 ]
-    }
-]};
-
-const page = document.getElementById("page");
-var toetsRegel = document.createElement("h2");
-toetsRegel.appendChild(document.createTextNode(model.toets));
-page.appendChild(toetsRegel);
-var naamRegel = document.createElement("div");
-naamRegel.appendChild(document.createTextNode("Leerling:"));
-page.appendChild(naamRegel);
-var questionNumber = 1;
-model.vragen.forEach(question=> {
-  var questionDiv = document.createElement("div");
-  questionDiv.appendChild(document.createTextNode(question.naam));
-  question.bolletjes.forEach(bolCount=> {
-    var bolletjesDiv = document.createElement("div");
-    bolletjesDiv.appendChild(document.createTextNode(questionNumber++));
-    for( var bol = 0; bol < bolCount; bol++)
-    {
-      var bolLine = document.createElement("div");
-      bolLine.appendChild(document.createTextNode("o"));
-      bolletjesDiv.appendChild(bolLine);
-      bolletjesDiv.style.margin = "0px";
-    } 
-    var emptyBox = document.createElement("div");
-    emptyBox.style.float = "right";
-    emptyBox.style.width = "10%";
-    emptyBox.style.height = "100%";
-    bolletjesDiv.appendChild(emptyBox);
-    questionDiv.appendChild(bolletjesDiv);
-  });
-  page.appendChild(questionDiv);
-  
-});
-</script>
-</body>
+.row {
+  flex-direction: row;
+}
+      </style>
+  </head>
+  <body>
+    <div id="page" style="border: none"></div>
+    <script lang="js">
+      document.title += model.toets;
+      const page = document.getElementById("page");
+      var toetsRegel = document.createElement("h2");
+      toetsRegel.appendChild(document.createTextNode(model.toets));
+      page.appendChild(toetsRegel);
+      var naamRegel = document.createElement("div");
+      naamRegel.appendChild(document.createTextNode("Leerling:"));
+      naamRegel.appendChild(document.createElement("p"))  
+      page.appendChild(naamRegel);
+      var questionNumber = 1;
+      model.vragen.forEach(question=> {
+        var questionDiv = document.createElement("div");
+        questionDiv.appendChild(document.createTextNode(question.naam));
+        
+        questionDiv.style.border = "none";
+        question.bolletjes.forEach(bolCount=> {
+          var subvraagDiv = document.createElement("div");
+          subvraagDiv.classList.add("row"); 
+         // subvraagDiv.style.border = "none";
+       
+          var vraagNrDiv = document.createElement("div");
+          vraagNrDiv.style.float = "left";
+          vraagNrDiv.style.width = "5%";
+          vraagNrDiv.style.height = "100%";
+          vraagNrDiv.style.border = "none";
+          vraagNrDiv.appendChild(document.createTextNode(questionNumber++));
+          
+          var bolletjesDiv = document.createElement("div");
+          bolletjesDiv.style.float = "left";
+          bolletjesDiv.style.width = "85%";
+          bolletjesDiv.style.border = "none";
+          bolletjesDiv.style.margin = "-2px";
+          
+          for( var bol = 0; bol < bolCount; bol++)
+          {
+            var bolLine = document.createElement("div");
+            bolLine.appendChild(document.createTextNode("○"));
+            bolletjesDiv.appendChild(bolLine);
+            bolLine.style.margin = "-.5px";
+            //bolLine.style.padding = "-1px";
+          }
+          subvraagDiv.appendChild(vraagNrDiv);
+          subvraagDiv.appendChild(bolletjesDiv);
+          questionDiv.appendChild(subvraagDiv);
+        });
+        page.appendChild(questionDiv);
+        
+      });
+    </script>
+  </body>
 </html>
