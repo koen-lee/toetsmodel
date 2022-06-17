@@ -36,7 +36,19 @@ var model = {
   <head>
     <title>Bolletjesmodel </title>
     <style>
-body {font-family: sans-serif;}
+body {font-family: sans-serif;} 
+.questionName { 
+	page-break-inside: avoid;
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+.questionName::after {
+    content: "";
+    display: block;
+    height: 50px;
+    margin-bottom: -50px;
+}
 div {
   border: 1px solid black;
   padding: 1px;
@@ -55,7 +67,7 @@ div {
   <body>
     <div id="page" style="border: none"></div>
     <script lang="js">
-      document.title += model.toets;
+      document.title += " " + model.toets;
       const page = document.getElementById("page");
       var toetsRegel = document.createElement("h2");
       toetsRegel.appendChild(document.createTextNode(model.toets));
@@ -67,14 +79,15 @@ div {
       var questionNumber = 1;
       model.vragen.forEach(question=> {
         var questionDiv = document.createElement("div");
-        questionDiv.appendChild(document.createTextNode(question.naam));
+        var questionRegel = document.createElement("div");		  
+        questionRegel.classList.add("questionName"); 
+		questionRegel.appendChild(document.createTextNode(question.naam));
+        questionDiv.appendChild(questionRegel);
         
         questionDiv.style.border = "none";
-		questionDiv.style.pageBreakInside = "avoid";
         question.bolletjes.forEach(bolCount=> {
           var subvraagDiv = document.createElement("div");
-          subvraagDiv.classList.add("row"); 
-         // subvraagDiv.style.border = "none";
+          subvraagDiv.classList.add("row");
        
           var vraagNrDiv = document.createElement("div");
           vraagNrDiv.style.float = "left";
@@ -95,7 +108,6 @@ div {
             bolLine.appendChild(document.createTextNode("o"));
             bolletjesDiv.appendChild(bolLine);
             bolLine.style.margin = "-.5px";
-            //bolLine.style.padding = "-1px";
           }
           subvraagDiv.appendChild(vraagNrDiv);
           subvraagDiv.appendChild(bolletjesDiv);
