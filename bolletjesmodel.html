@@ -1,17 +1,35 @@
 <!DOCTYPE html>
 <html>
   <script lang="js">
- var model = { 
-   "toets": "Havo WisB 2022.1",
+var model = { 
+   "toets": "Havo WisB 2022.2",
    "vragen": [
-      { "naam": "Bevolkingsgroei",
-        "bolletjes": [ 2,3,4,3 ]
+      { "naam": "Logaritme en parabool",
+        "bolletjes": [ 3,2,5 ]
       },
-      { "naam": "Raketbaan",
-        "bolletjes": [ 4,3,1,4,4,4,4,4,4,4 ]
+      { "naam": "Gooilandkaart",
+        "bolletjes": [ 6 ]
       },
-      { "naam": "Gulden snede",
-        "bolletjes": [ 2,3,1,4,4,4 ]
+	{ "naam": "Wortel en cirkel",
+        "bolletjes": [ 3,7 ]
+      },
+	{ "naam": "Sinusoïden en somfunctie",
+        "bolletjes": [ 4,7 ]
+      },
+	{ "naam": "Luchtvervuiling",
+        "bolletjes": [ 4,4,3 ]
+      },
+	{ "naam": "Minimale omtrek",
+        "bolletjes": [ 6 ]
+      },
+	{ "naam": "Een raaklijn en een evenwijdige lijn door O",
+        "bolletjes": [ 5,3,4 ]
+      },
+	{ "naam": "Daglengte",
+        "bolletjes": [ 2,3 ]
+      },
+      { "naam": "Vierkant en halve cirkel",
+        "bolletjes": [ 5 ]
       }
   ]};
   </script>
@@ -52,6 +70,7 @@ div {
         questionDiv.appendChild(document.createTextNode(question.naam));
         
         questionDiv.style.border = "none";
+		questionDiv.style.pageBreakInside = "avoid";
         question.bolletjes.forEach(bolCount=> {
           var subvraagDiv = document.createElement("div");
           subvraagDiv.classList.add("row"); 
