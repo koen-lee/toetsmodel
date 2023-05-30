@@ -13,10 +13,10 @@ var model = {
       { "naam": "Gooilandkaart",
         "bolletjes": [ 6 ]
       },
-	    { "naam": "Wortel en cirkel",
+      { "naam": "Wortel en cirkel",
         "bolletjes": [ 3,7 ]
       },
-	    { "naam": "Sinusoïden en somfunctie",
+      { "naam": "Sinusoïden en somfunctie",
         "bolletjes": [ 4,7 ]
       }
       ]
